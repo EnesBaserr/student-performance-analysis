@@ -12,6 +12,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import r2_score
+import matplotlib.pyplot as plt
 
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -19,7 +21,6 @@ from tensorflow.keras.layers import Dense, Input
 
 
 data = pd.read_csv("data/student_performance_data.csv")
-
 
 data.fillna(data.mean(), inplace=True)
 
@@ -35,7 +36,7 @@ model = Sequential([
     Input(shape=(X_train.shape[1],)),
     Dense(64, activation='relu'),
     Dense(32, activation='relu'),
-    Dense(1)
+    Dense(1) 
 ])
 
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
@@ -45,12 +46,24 @@ history = model.fit(X_train, y_train, epochs=50, validation_split=0.2, batch_siz
 loss, mae = model.evaluate(X_test, y_test)
 print(f"Mean Absolute Error on Test Set: {mae}")
 
-new_data = np.array([[23, 84, -1, 1, 0, 7, 73, -1, 1, 0, -1, 0, 0, 1, 3, 0, -1, -1, 0]])
+new_data_test = pd.DataFrame(X_test).sample(n=1, random_state=42) 
 
-new_data_df = pd.DataFrame(new_data, columns=X.columns)
+selected_index = new_data_test.index[0]
+actual_exam_score = y_test.iloc[selected_index]
 
-new_data_scaled = scaler.transform(new_data_df)
+predicted_score = model.predict(new_data_test)
 
-predicted_score = model.predict(new_data_scaled)
+y_pred = model.predict(X_test)
+r2 = r2_score(y_test, y_pred)
+print(f"R² Score on the Test Set: {r2}")
 
-print(f"Predicted Exam Score: {predicted_score[0]}")
+print(f"Selected Data from X_test: \n{new_data_test}")
+print(f"Actual Exam Score: {actual_exam_score}")
+print(f"Predicted Exam Score: {predicted_score[0][0]}")
+
+plt.scatter(y_test, y_pred)
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--k')
+plt.xlabel('Actual Exam Score')
+plt.ylabel('Predicted Exam Score')
+plt.title('Predicted vs Actual Exam Scores')
+plt.show()
