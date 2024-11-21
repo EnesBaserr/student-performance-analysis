@@ -55,11 +55,9 @@ predicted_score = model.predict(new_data_test)
 
 y_pred = model.predict(X_test)
 r2 = r2_score(y_test, y_pred)
-print(f"R² Score on the Test Set: {r2}")
-
-print(f"Selected Data from X_test: \n{new_data_test}")
 print(f"Actual Exam Score: {actual_exam_score}")
 print(f"Predicted Exam Score: {predicted_score[0][0]}")
+print(f"R² Score on the Test Set: {r2}")
 
 threshold = 5
 
