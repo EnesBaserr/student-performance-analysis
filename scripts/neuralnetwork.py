@@ -61,9 +61,18 @@ print(f"Selected Data from X_test: \n{new_data_test}")
 print(f"Actual Exam Score: {actual_exam_score}")
 print(f"Predicted Exam Score: {predicted_score[0][0]}")
 
+threshold = 5
+
+errors = np.abs(y_test - y_pred.flatten())
+
+accuracy_within_threshold = np.mean(errors <= threshold) * 100
+
+print(f"Percentage of predictions within ±{threshold} points of actual scores: {accuracy_within_threshold:.2f}%")
+
+
 plt.scatter(y_test, y_pred)
 plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--k')
 plt.xlabel('Actual Exam Score')
 plt.ylabel('Predicted Exam Score')
-plt.title('Predicted vs Actual Exam Scores')
+plt.title('Predicted vs Actual Exam Scores on Test Set')
 plt.show()
