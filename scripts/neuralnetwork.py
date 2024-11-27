@@ -59,7 +59,7 @@ print(f"Actual Exam Score: {actual_exam_score}")
 print(f"Predicted Exam Score: {predicted_score[0][0]}")
 print(f"R² Score on the Test Set: {r2}")
 
-threshold = 5
+threshold = 2
 
 errors = np.abs(y_test - y_pred.flatten())
 
