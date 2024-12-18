@@ -1,7 +1,7 @@
 # Project Name
 
 ## Overview
-This project is designed to [describe the purpose of your project, e.g., automate a task, solve a specific problem, etc.]. It is built using Python and includes a virtual environment for managing dependencies.
+This project is designed to predict the exam scores of students by examining their performance factors. It is built using Python and includes a virtual environment for managing dependencies.
 
 ---
 
@@ -18,8 +18,8 @@ This project is designed to [describe the purpose of your project, e.g., automat
 ### Step 1: Clone the Repository
 Clone the repository to your local machine:
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/EnesBaserr/student-performance-analysis.git
+cd student-performance-analysis
 ```
 ---
 ### Step 2 : Create Virtual Env
