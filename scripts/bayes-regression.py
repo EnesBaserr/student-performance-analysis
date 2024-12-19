@@ -34,19 +34,12 @@ def bayesian_linear_regression(data, dataset_name):
     plt.ylabel("Predicted Values")
     plt.legend()
     plt.grid()
+    plt.text(0.50, 0.95, f"R²: {r2:.4f}\nMAE: {mae:.4f}\nMSE: {mse:.4f}",
+             transform=plt.gca().transAxes, fontsize=12, verticalalignment='top',
+             bbox=dict(facecolor='white', alpha=0.7))
     plt.show()
 
-    # Metrics Plot
-    plt.figure(figsize=(8, 4))
-    metrics = ['MSE', 'MAE', 'R^2']
-    values = [mse, mae, r2]
-    plt.bar(metrics, values, color=['blue', 'orange', 'green'])
-    for i, v in enumerate(values):
-        plt.text(i, v + 0.01, f"{v:.4f}", ha='center')
-    plt.title(f"Bayesian Linear Regression Metrics - {dataset_name}")
-    plt.ylabel("Value")
-    plt.grid(axis='y')
-    plt.show()
+
 
     return mse, mae, r2
 
@@ -62,8 +55,8 @@ file_paths = [
     ,'../data/student_performance_data.csv'
 ]
 
-for file_path in file_paths:
-    dataset_name = file_path.split('/')[-1]
+for i,file_path in enumerate (file_paths):
+    dataset_name = "Outliers Removed Dataset" if i == 0 else "Original Dataset"
     data = preprocess_data(file_path)
 
     print(f"\nResults for {dataset_name}:")
