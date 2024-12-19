@@ -1,8 +1,8 @@
-# Project Name
+# CMPE481 SP.TP.IN DATA ANALYSIS AND VISUALIZATION COURSE - Term Project
 
 ## Overview
-This project is designed to predict the exam scores of students by examining their performance factors. It is built using Python and includes a virtual environment for managing dependencies.
-
+- This project is designed to predict the exam scores of students by examining their performance factors. It is built using Python and includes a virtual environment for managing dependencies.
+- Dataset available here : https://www.kaggle.com/datasets/lainguyn123/student-performance-factors
 ---
 
 
