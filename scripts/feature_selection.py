@@ -102,7 +102,7 @@ print("Top Important Features:")
 print(important_features_df.head(10))
 
 # Visualize the correlation matrix
-##visualize_correlation_matrix(data)
+visualize_correlation_matrix(data)
 
 # Visualize top 5 features vs target with trend curve
 top_5_features = important_features_df["Feature"].head(5).tolist()
