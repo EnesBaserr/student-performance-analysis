@@ -26,7 +26,7 @@ def ridge_regression(data, dataset_name):
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-    # Plot
+    # Plot Predicted vs Actual Values
     plt.figure(figsize=(10, 6))
     plt.scatter(y_test, y_pred, alpha=0.6, label='Predicted vs Actual')
     plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Perfect Prediction')
@@ -35,21 +35,13 @@ def ridge_regression(data, dataset_name):
     plt.ylabel("Predicted Values")
     plt.legend()
     plt.grid()
-    plt.show()
-
-    # Metrics Plot
-    plt.figure(figsize=(8, 4))
-    metrics = ['MSE', 'MAE', 'R^2']
-    values = [mse, mae, r2]
-    plt.bar(metrics, values, color=['blue', 'orange', 'green'])
-    for i, v in enumerate(values):
-        plt.text(i, v + 0.01, f"{v:.4f}", ha='center')
-    plt.title(f"Ridge Regression Metrics - {dataset_name}")
-    plt.ylabel("Value")
-    plt.grid(axis='y')
+    # Add metrics as labels
+    plt.text(0.50, 0.95, f"R²: {r2:.4f}\nMAE: {mae:.4f}\nMSE: {mse:.4f}",
+             transform=plt.gca().transAxes, fontsize=12, verticalalignment='top', bbox=dict(facecolor='white', alpha=0.7))
     plt.show()
 
     return mse, mae, r2
+
 
 # Linear Regression Function
 def linear_regression(data, dataset_name):
@@ -69,7 +61,7 @@ def linear_regression(data, dataset_name):
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-    # Plot
+    # Plot Predicted vs Actual Values
     plt.figure(figsize=(10, 6))
     plt.scatter(y_test, y_pred, alpha=0.6, label='Predicted vs Actual')
     plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Perfect Prediction')
@@ -78,19 +70,11 @@ def linear_regression(data, dataset_name):
     plt.ylabel("Predicted Values")
     plt.legend()
     plt.grid()
+    # Add metrics as labels
+    plt.text(0.50, 0.95, f"R²: {r2:.4f}\nMAE: {mae:.4f}\nMSE: {mse:.4f}",
+             transform=plt.gca().transAxes, fontsize=12, verticalalignment='top', bbox=dict(facecolor='white', alpha=0.7))
     plt.show()
 
-    # Metrics Plot
-    plt.figure(figsize=(8, 4))
-    metrics = ['MSE', 'MAE', 'R^2']
-    values = [mse, mae, r2]
-    plt.bar(metrics, values, color=['blue', 'orange', 'green'])
-    for i, v in enumerate(values):
-        plt.text(i, v + 0.01, f"{v:.4f}", ha='center')
-    plt.title(f"Linear Regression Metrics - {dataset_name}")
-    plt.ylabel("Value")
-    plt.grid(axis='y')
-    plt.show()
 
     return mse, mae, r2
 
@@ -106,8 +90,8 @@ file_paths = [
     '../data/student_performance_data.csv'
 ]
 
-for file_path in file_paths:
-    dataset_name = file_path.split('/')[-1]
+for i,file_path in enumerate (file_paths):
+    dataset_name= "Outliers Removed Dataset" if i==0 else "Original Dataset"
     data = preprocess_data(file_path)
 
     print(f"\nResults for {dataset_name}:")
